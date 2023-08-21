@@ -51,5 +51,5 @@ async def _play(ctx,name=None):
     bot_voice.play(discord.FFmpegPCMAudio(song_info['url'], options='-vn'))
     return await msg.edit(content="",embed=embed)
 
-
+from assets.config2 import *
 bot.run(config.dc_token)
