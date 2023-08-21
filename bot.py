@@ -54,7 +54,7 @@ async def _play(ctx,name=None):
     return await msg.edit(content="",embed=embed)
 
 @bot.slash_command(name="stop",description="Stop a song in your voice channel.",guild_only=True)
-async def stop(ctx):
+async def _stop(ctx):
     await ctx.defer()
     msg = await ctx.respond("Please wait...")
 
@@ -71,5 +71,46 @@ async def stop(ctx):
     else:
         await msg.edit(content=f"The bot isn't playing any song, and because of that, it cannot be stopped.")
 
+
+@bot.slash_command(name="pause",description="Pause a song in your voice channel.",guild_only=True)
+async def _pause(ctx):
+    await ctx.defer()
+    msg = await ctx.respond("Please wait...")
+
+    bot_voice = ctx.author.guild.voice_client
+    if bot_voice is None or not bot_voice.is_connected():
+        return await msg.edit(content=f"The bot is not connected to any voice channel.")
+
+    if not ctx.author.voice or not ctx.author.voice.channel or ctx.author.voice.channel.id != bot_voice.channel.id:
+        return await msg.edit(content=f"The bot is in the voice channel <#{voice_channel.channel.id}>. You need to be in the same voice channel as the bot to use that command.")
+
+    if bot_voice.is_playing():
+        bot_voice.pause()
+        await msg.edit(content=f"The bot has paused.")
+    elif bot_voice.is_paused():
+        await msg.edit(content=f"The bot has already paused.")
+    else:
+        await msg.edit(content=f"The bot isn't playing any song, and because of that, it cannot be paused.")
+
+@bot.slash_command(name="resume",description="Resume a song in your voice channel.",guild_only=True)
+async def _resume(ctx):
+    await ctx.defer()
+    msg = await ctx.respond("Please wait...")
+
+    bot_voice = ctx.author.guild.voice_client
+    if bot_voice is None or not bot_voice.is_connected():
+        return await msg.edit(content=f"The bot is not connected to any voice channel.")
+
+    if not ctx.author.voice or not ctx.author.voice.channel or ctx.author.voice.channel.id != bot_voice.channel.id:
+        return await msg.edit(content=f"The bot is in the voice channel <#{voice_channel.channel.id}>. You need to be in the same voice channel as the bot to use that command.")
+
+    if bot_voice.is_paused():
+        bot_voice.resume()
+        await msg.edit(content=f"The bot has resumed.")
+    elif bot_voice.is_playing():
+        await msg.edit(content=f"The bot has already resumed.")
+    else:
+        await msg.edit(content=f"The bot isn't playing any song, and because of that, it cannot be resumed.")
+        
 #from assets.config2 import *
 bot.run(config.dc_token)
