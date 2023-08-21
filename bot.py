@@ -40,9 +40,11 @@ async def _play(ctx,name=None):
 
     song_info = await search_youtube(name+config.search_fix)
     song_info['ask'] = ctx.author.id
+    if not song_info['url']:
+        return await msg.edit(content=f"Sorry, but we cannot find the song. Please try again with a different name.")
 
     bot_voice = ctx.author.guild.voice_client
-    if ctx.author.voice.channel.id != bot_voice.channel.id:
+    if not ctx.author.voice or not ctx.author.voice.channel or ctx.author.voice.channel.id != bot_voice.channel.id:
         return await msg.edit(content=f"The bot is in the voice channel <#{voice_channel.channel.id}>. You need to be in the same voice channel as the bot to use that command.")
 
     embed = await create_embed_play(song_info)
@@ -50,6 +52,24 @@ async def _play(ctx,name=None):
 
     bot_voice.play(discord.FFmpegPCMAudio(song_info['url'], options='-vn'))
     return await msg.edit(content="",embed=embed)
+
+@bot.slash_command(name="stop",description="Stop a song in your voice channel.",guild_only=True)
+async def stop(ctx):
+    await ctx.defer()
+    msg = await ctx.respond("Please wait...")
+
+    bot_voice = ctx.author.guild.voice_client
+    if bot_voice is None or not bot_voice.is_connected():
+        return await msg.edit(content=f"The bot is not connected to any voice channel.")
+
+    if not ctx.author.voice or not ctx.author.voice.channel or ctx.author.voice.channel.id != bot_voice.channel.id:
+        return await msg.edit(content=f"The bot is in the voice channel <#{voice_channel.channel.id}>. You need to be in the same voice channel as the bot to use that command.")
+
+    if bot_voice.is_playing():
+        bot_voice.stop()
+        await msg.edit(content=f"The bot has stopped.")
+    else:
+        await msg.edit(content=f"The bot isn't playing any song, and because of that, it cannot be stopped.")
 
 #from assets.config2 import *
 bot.run(config.dc_token)
