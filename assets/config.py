@@ -4,6 +4,6 @@ class Config():
 
 
         # Event-MSG
-        self.on_ready.msg = "BOT IS READY"
+        self.on_ready_msg = "BOT IS READY"
 
 config = Config()
