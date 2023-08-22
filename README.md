@@ -21,6 +21,8 @@
 - ❌ `Profiles` - Details on users who listen to the bot, including song count, favorite track, and more.
 <h1>How to install?</h1>
 
+<b>⚠️ I'm not sure if this bot will work, but it works on my PC. So, if you encounter any problems, please create an issue, and I will try to fix it.</b><br>
+
 <b>Windows:</b> 
 - `py -3 -m pip install -U py-cord`
 - `py -3 -m pip install -U "py-cord[voice]"`
