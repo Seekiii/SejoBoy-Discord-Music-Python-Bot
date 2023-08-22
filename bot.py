@@ -184,5 +184,4 @@ async def _np(ctx):
         return await msg.edit(content="", embed=embed)
     return await msg.edit(content="There is no song currently playing.")
 
-#from assets.config2 import *
 bot.run(config.dc_token)
