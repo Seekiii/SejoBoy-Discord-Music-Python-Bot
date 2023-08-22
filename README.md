@@ -45,3 +45,8 @@
 - If you still need assistance, you can create an [issue](https://github.com/Seekiii/SejoBoy-Discord-Music-Python-Bot/issues) with details about the problem you're facing. I'll do my best to help you troubleshoot and resolve the issue.
 
 <b>Your feedback and contributions are valuable in improving this project. Thank you!</b>
+
+# ⭐ Star History:
+<a href="https://github.com/seekiii/SejoBoy-Discord-Music-Python-Bot/stargazers">
+    <img width="500" alt="Star History Chart" src="https://api.star-history.com/svg?repos=seekiii/SejoBoy-Discord-Music-Python-Bot&type=Date">
+</a>
