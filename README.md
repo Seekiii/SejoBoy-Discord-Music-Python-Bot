@@ -19,6 +19,7 @@
 - ❌ `Logs` - Track errors, bugs, command usage, guild joins/leaves, and more through a webhook.
 - ❌ `Stats` - Statistics about the most listened-to songs, users spending the most time in voice channels, and more.
 - ❌ `Profiles` - Details on users who listen to the bot, including song count, favorite track, and more.
+- ❌ `Bugs` - Fix all errors and bugs that can happen in the bot.
 <h1>How to install?</h1>
 
 <b>⚠️ I'm not sure if this bot will work, but it works on my PC. So, if you encounter any problems, please create an issue, and I will try to fix it.</b><br>
