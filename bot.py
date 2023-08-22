@@ -146,7 +146,6 @@ async def _queue(ctx):
                 queue_string += f"[ **NOW** ] - {song['title']}\n"
             else:
                 queue_string += f"[ **{num}** ] - {song['title']}\n"
-        print(queue_string)
         embed = discord.Embed(title='Queue', description=queue_string, color=config.embed_color['queue'], timestamp=datetime.datetime.now())
         return await msg.edit(content="", embed=embed)
     return await msg.edit(content="Queue is empty.")
@@ -170,6 +169,20 @@ async def _skip(ctx):
         embed.set_thumbnail(url=_next['img'])
         return await msg.edit(content="", embed=embed)
     return await msg.edit(content="The song cannot be skipped because the queue is empty.")
+
+@bot.slash_command(name="np",description="See information about the currently playing song.",guild_only=True)
+async def _np(ctx):
+    global queue
+    await ctx.defer()
+    msg = await ctx.respond("Please wait...")
+    if len(queue) > 0:
+        bot_voice = ctx.author.guild.voice_client
+        current = queue[0]
+
+        embed = discord.Embed(title='Now Playing', description=f"**{current['title']}**", color=config.embed_color['skip'], timestamp=datetime.datetime.now())
+        embed.set_thumbnail(url=_next['img'])
+        return await msg.edit(content="", embed=embed)
+    return await msg.edit(content="There is no song currently playing.")
 
 #from assets.config2 import *
 bot.run(config.dc_token)
