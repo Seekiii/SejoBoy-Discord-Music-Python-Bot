@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands, tasks
 
 import datetime
+import asyncio
+
 # Assets
 from assets.config import *
 from assets.music import *
@@ -23,9 +25,7 @@ async def queue_start():
     if len(queue) > 1:
         current = queue[0]
         _next = queue[1]
-        if current['voice'].is_playing():
-            print("Još svira")
-        else:
+        if not current['voice'].is_playing():
             current['voice'].play(discord.FFmpegPCMAudio(_next['url'], options='-vn'))
             del queue[0]
 
@@ -71,7 +71,7 @@ async def _play(ctx,name=None):
     else:
         embed = await create_embed_play(song_info,queue=True)
         embed, title = embed[0], embed[1]
-    queue.append({"title":title,"embed":embed,"url":song_info['url'],"voice":bot_voice})
+    queue.append({"title":title,"embed":embed,"url":song_info['url'],"voice":bot_voice,"img":song_info['thumbnail']})
     return await msg.edit(content="",embed=embed)
 
 @bot.slash_command(name="stop",description="Stop a song in your voice channel.",guild_only=True)
@@ -150,6 +150,26 @@ async def _queue(ctx):
         embed = discord.Embed(title='Queue', description=queue_string, color=config.embed_color['queue'], timestamp=datetime.datetime.now())
         return await msg.edit(content="", embed=embed)
     return await msg.edit(content="Queue is empty.")
+
+@bot.slash_command(name="skip",description="Skip the current song in the voice channel.",guild_only=True)
+async def _skip(ctx):
+    global queue
+    await ctx.defer()
+    msg = await ctx.respond("Please wait...")
+    if len(queue) > 1:
+        bot_voice = ctx.author.guild.voice_client
+        current = queue[0]
+        _next = queue[1]
+        if bot_voice.is_playing():
+            bot_voice.stop()
+        bot_voice = ctx.author.guild.voice_client
+        bot_voice.play(discord.FFmpegPCMAudio(_next['url'], options='-vn'))
+        del queue[0]
+
+        embed = discord.Embed(title='Skipped', description=f"**{_next['title']}**", color=config.embed_color['skip'], timestamp=datetime.datetime.now())
+        embed.set_thumbnail(url=_next['img'])
+        return await msg.edit(content="", embed=embed)
+    return await msg.edit(content="The song cannot be skipped because the queue is empty.")
 
 #from assets.config2 import *
 bot.run(config.dc_token)
