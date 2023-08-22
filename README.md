@@ -2,6 +2,7 @@
 
 # 📜 Commands:
 
+- ❌ `/help` - List with all commands.
 - ✅ `/play [name]` - Play a song in voice channel.
 - ✅ `/stop` - Stop a song in voice channel.
 - ✅ `/pause` - Pause a song in voice channel.
