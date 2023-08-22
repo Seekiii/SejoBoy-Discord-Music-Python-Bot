@@ -1,6 +1,6 @@
 <p align="center"><b>SejoBoy</b><br>Discord Music Bot</p>
 
-<h1>📜 Commands:</h1>
+# 📜 Commands:
 
 - ✅ `/play [name]` - Play a song in voice channel.
 - ✅ `/stop` - Stop a song in voice channel.
@@ -14,7 +14,7 @@
 - ❌ `/shuffle` - Shuffle the songs in the queue.
 - ❌ `/volume` - Change the volume of the bot.
 
-<h1>📝 To-Do:</h1>
+# 📝 To-Do:
 
 - ❌ `Logs` - Track errors, bugs, command usage, guild joins/leaves, and more through a webhook.
 - ❌ `Stats` - Statistics about the most listened-to songs, users spending the most time in voice channels, and more.
@@ -31,5 +31,11 @@
 - `python3 -m pip install -U "py-cord[voice]"`
 - `pip3 install ffmpeg-python`
 
-<h1>⚠️ ALERT:</h1>
-<p align="center"><b>I'm not sure if this is a good installation because I forgot specifically what is required to run this, but if you encounter any errors, create an issue and I will help you.</b></p>
+# ⚠️ Installation Alert:
+
+<b>If you encounter any issues during the installation process or while running the bot, please follow these steps:</b>
+
+- Double-check that you have followed the installation instructions correctly.
+- If you still need assistance, you can create an [issue](https://github.com/Seekiii/SejoBoy-Discord-Music-Python-Bot/issues) with details about the problem you're facing. I'll do my best to help you troubleshoot and resolve the issue.
+
+<b>Your feedback and contributions are valuable in improving this project. Thank you!</b>
