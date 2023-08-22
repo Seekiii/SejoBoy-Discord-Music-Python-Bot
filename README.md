@@ -25,11 +25,13 @@
 - `py -3 -m pip install -U py-cord`
 - `py -3 -m pip install -U "py-cord[voice]"`
 - `pip install ffmpeg-python`
+- `pip install youtube_dl`
 
 <b>Linux:</b> 
 - `python3 -m pip install -U py-cord`
 - `python3 -m pip install -U "py-cord[voice]"`
 - `pip3 install ffmpeg-python`
+- `pip3 install youtube_dl`
 
 # ⚠️ Installation Alert:
 
